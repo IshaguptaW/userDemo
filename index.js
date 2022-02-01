@@ -3,11 +3,7 @@ const Order = require("./models/orders")
 const sequelize = require("./database")
 
 User.hasMany(Order);
-Users.addScope('aciveUser', {
-    where: {
-        status: 1
-    }
-})
+
 let userID = null;
 
 sequelize.sync().then(result => {

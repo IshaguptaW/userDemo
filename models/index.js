@@ -7,6 +7,7 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
+const User = require("./user");
 
 let sequelize;
 if (config.use_env_variable) {
@@ -14,6 +15,13 @@ if (config.use_env_variable) {
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+
+/*----Scope-----*/
+User.addScope('aciveUser', {
+  where: {
+      status: 1
+  }
+})
 
 fs
   .readdirSync(__dirname)
